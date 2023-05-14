@@ -106,7 +106,7 @@ Partitioning is a way in which certain `where` queries can be sped up, by having
 
 Consider a table named `transac_recds`. Its data files would be stored in the following way:
 
-```bash
+```
 /usr/hive/warehouse/DB_NAME/transac_recds/file1.txt
 /usr/hive/warehouse/DB_NAME/transac_recds/file2.txt
 ```
@@ -117,7 +117,18 @@ Now, if we want to run the following query:
 SELECT * FROM transac_recds WHERE month="JAN";
 ```
 
+It would require processing of all records in the table. This may lead to unnecessary overhead in case filtering by `month` is a common task.
 
+To reduce query execution time, we may partition our table as follows:
+
+```
+/usr/hive/warehouse/DB_NAME/transac_recds/month=JAN  // Only JAN data
+/usr/hive/warehouse/DB_NAME/transac_recds/month=FEB  // Only FEB data
+/usr/hive/warehouse/DB_NAME/transac_recds/month=MAR  // Only MAR data
+...
+```
+
+Now the above query will only process the records in the relevant partion (of `JAN`), thus decreasing execution time.
 
 ## Common commands
 
