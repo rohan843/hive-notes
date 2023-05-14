@@ -14,6 +14,8 @@
   - [Abilities](#abilities)
   - [Differneces with traditional RDBMS](#differneces-with-traditional-rdbms)
   - [Type system](#type-system)
+  - [Hive Data Models](#hive-data-models)
+  - [Common commands](#common-commands)
 
 ## Background
 
@@ -83,3 +85,22 @@ The primitive types are:
    - `DOUBLE`: Double precision
 4. String type:
    - `STRING`: Sequence of characters
+
+Hive also supports structs, maps, and arrays.
+
+## Hive Data Models
+
+1. Databases: contain tables with unique names, and have their own namespaces. Behave as a normal RDBMS database.
+   1. A `default` database is provided by default. Rest can be created.
+2. Partitions
+3. Buckets or clusters
+
+## Common commands
+
+1. `create database <DB name> [comment 'place comment here'];`: used to create a new database with the given name. Can optionally add a comment explaining the purpose of the DB.
+2. `describe database [extended] <DB name>;`: Displays the properties of the specified database.
+3. `show databases;`: Displays all databases.
+4. `use <DB name>;`: Sets the specified database to the currently active database.
+5. `create table <table name>[...schema...];`: Creates a table with the desired schema in the active DB.
+6. `show tables;`: Displays all tables in the current database.
+7. `LOAD DATA [Data source] INTO TABLE <table name>;`: Loads the data into the specified table.
