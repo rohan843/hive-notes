@@ -15,7 +15,8 @@
   - [Differneces with traditional RDBMS](#differneces-with-traditional-rdbms)
   - [Type system](#type-system)
   - [Hive Data Models](#hive-data-models)
-  - [Partition](#partition)
+  - [Partitioning](#partitioning)
+  - [Bucketing](#bucketing)
   - [Common commands](#common-commands)
 
 ## Background
@@ -100,7 +101,7 @@ Hive also supports structs, maps, and arrays.
 2. Partitions
 3. Buckets or clusters
 
-## Partition
+## Partitioning
 
 Partitioning is a way in which certain `where` queries can be sped up, by having to look at lesser data files. It divides a table into smaller, manageable parts.
 
@@ -129,6 +130,16 @@ To reduce query execution time, we may partition our table as follows:
 ```
 
 Now the above query will only process the records in the relevant partion (of `JAN`), thus decreasing execution time.
+
+Basically, partitioning creates as many partitions as there are unique values in a column.
+
+## Bucketing
+
+This is similar to partitioning. Consider a case where there are a very high number of unique values in a column. If a table is partitioned on such a column, there will be a large number of partitions, leading to a high maintainence overhead.
+
+Bucketing allows an alternate strategy. Here, we create a fixed number of buckets, say N. Each value in a column is hashed, and compressed to get an integer in the range 0 to N - 1. Based on this value, the bucket for the column is decided.
+
+We can use bucketing and partitioning together for best performance.
 
 ## Common commands
 
