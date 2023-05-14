@@ -13,6 +13,7 @@
   - [Limitations](#limitations)
   - [Abilities](#abilities)
   - [Differneces with traditional RDBMS](#differneces-with-traditional-rdbms)
+  - [Type system](#type-system)
 
 ## Background
 
@@ -65,3 +66,20 @@ Other components include hive compiler, execution engine, etc.
 
 1. **Schema-on-read**: This scheme means that the schema of data is validated not when the data is loaded, but when it is queried (i.e., read). This allows for a very fast initial load.
 2. No updates, transactions or indexes are supported.
+
+## Type system
+
+The primitive types are:
+
+1. Boolean type:
+   - `BOOLEAN`: {`TRUE`, `FALSE`}
+2. Integers:
+   - `TINYINT`: 1 Byte integer
+   - `SMALLINT`: 2 Byte integer
+   - `INT`: 4 Byte integer
+   - `BIGINT`: 8 Byte integer
+3. Floating point numbers:
+   - `FLOAT`: Single precision
+   - `DOUBLE`: Double precision
+4. String type:
+   - `STRING`: Sequence of characters
