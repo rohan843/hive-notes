@@ -94,6 +94,7 @@ Hive also supports structs, maps, and arrays.
    1. A `default` database is provided by default. Rest can be created.
    2. Within HDFS, databases are stored as folders, with a file structure of tables within.
    3. Each table has a copy of its data, that is separately stored from other tables' data.
+   4. **External tables** are a special kind of tables that donot have ownership of the data. They refer to some other source, and display its data, in a column format.
 2. Partitions
 3. Buckets or clusters
 
@@ -104,7 +105,7 @@ Hive also supports structs, maps, and arrays.
 3. `show databases;`: Displays all databases.
 4. `use <DB name>;`: Sets the specified database to the currently active database.
 5. `create table <table name>[...schema...];`: Creates a table with the desired schema in the active DB.
-6. `show tables;`: Displays all tables in the current database.
-7. `LOAD DATA [Data source] INTO TABLE <table name>;`: Loads the data into the specified table.
-8. Select-where queries are similar to those in SQL.
-9. 
+6. `create external table <table name>[...schema...] LOCATION <path to data file in HDFS>;`: Creates an external table with the desired schema in the active DB, and refers to a specified data file.
+7. `show tables;`: Displays all tables in the current database.
+8. `LOAD DATA [Data source] INTO TABLE <table name>;`: Loads the data into the specified table.
+9. Select-where queries are similar to those in SQL.
