@@ -92,6 +92,8 @@ Hive also supports structs, maps, and arrays.
 
 1. Databases: contain tables with unique names, and have their own namespaces. Behave as a normal RDBMS database.
    1. A `default` database is provided by default. Rest can be created.
+   2. Within HDFS, databases are stored as folders, with a file structure of tables within.
+   3. Each table has a copy of its data, that is separately stored from other tables' data.
 2. Partitions
 3. Buckets or clusters
 
@@ -104,3 +106,5 @@ Hive also supports structs, maps, and arrays.
 5. `create table <table name>[...schema...];`: Creates a table with the desired schema in the active DB.
 6. `show tables;`: Displays all tables in the current database.
 7. `LOAD DATA [Data source] INTO TABLE <table name>;`: Loads the data into the specified table.
+8. Select-where queries are similar to those in SQL.
+9. 
