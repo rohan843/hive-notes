@@ -33,6 +33,7 @@ There are many possible types of metastore:
 
 1. Embedded metastore: Comes built into the Hive ecosystem. It stores the metadata in a derby database, however, only one user connection, such as only one shell can access it at a time.
 2. Local metastore: May use some database such as MySQL. Allows multiple user connections.
+3. Remote metastore: Like local metastore, however, accessed via a remote machine.
 
 ### Hive driver
 
