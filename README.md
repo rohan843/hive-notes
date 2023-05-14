@@ -15,6 +15,7 @@
   - [Differneces with traditional RDBMS](#differneces-with-traditional-rdbms)
   - [Type system](#type-system)
   - [Hive Data Models](#hive-data-models)
+  - [Partition](#partition)
   - [Common commands](#common-commands)
 
 ## Background
@@ -56,7 +57,7 @@ Other components include hive compiler, execution engine, etc.
 3. Latency for Hive queries is generally very high (some minutes).
 4. Provides unoptimal latency for interactive data browsing.
 
-## Abilities 
+## Abilities
 
 1. Can filter rows from a table using a `where` clause.
 2. Can store the results of a query into another table.
@@ -93,10 +94,30 @@ Hive also supports structs, maps, and arrays.
 1. Databases: contain tables with unique names, and have their own namespaces. Behave as a normal RDBMS database.
    1. A `default` database is provided by default. Rest can be created.
    2. Within HDFS, databases are stored as folders, with a file structure of tables within.
-   3. Each table has a copy of its data, that is separately stored from other tables' data.
+   3. Each table has a copy of its data, that is separately stored from other tables' data. These tables are refered to as **managed tables**.
    4. **External tables** are a special kind of tables that donot have ownership of the data. They refer to some other source, and display its data, in a column format.
+   5. Dropping a managed table destroys the data, while dropping an external data preserves the data.
 2. Partitions
 3. Buckets or clusters
+
+## Partition
+
+Partitioning is a way in which certain `where` queries can be sped up, by having to look at lesser data files. It divides a table into smaller, manageable parts.
+
+Consider a table named `transac_recds`. Its data files would be stored in the following way:
+
+```bash
+/usr/hive/warehouse/DB_NAME/transac_recds/file1.txt
+/usr/hive/warehouse/DB_NAME/transac_recds/file2.txt
+```
+
+Now, if we want to run the following query:
+
+```sql
+SELECT * FROM transac_recds WHERE month="JAN";
+```
+
+
 
 ## Common commands
 
@@ -109,3 +130,4 @@ Hive also supports structs, maps, and arrays.
 7. `show tables;`: Displays all tables in the current database.
 8. `LOAD DATA [Data source] INTO TABLE <table name>;`: Loads the data into the specified table.
 9. Select-where queries are similar to those in SQL.
+10. `drop table <table name>;`: Drops the specified table, and deletes the data if the table was a managed table.
