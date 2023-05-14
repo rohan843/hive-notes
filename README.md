@@ -16,7 +16,7 @@
   - [Type system](#type-system)
   - [Hive Data Models](#hive-data-models)
   - [Partitioning](#partitioning)
-  - [Bucketing](#bucketing)
+  - [Bucketing/Clustering](#bucketingclustering)
   - [Common commands](#common-commands)
 
 ## Background
@@ -131,9 +131,19 @@ To reduce query execution time, we may partition our table as follows:
 
 Now the above query will only process the records in the relevant partion (of `JAN`), thus decreasing execution time.
 
-Basically, partitioning creates as many partitions as there are unique values in a column.
+Basically, partitioning creates as many partitions as there are unique values in a column. This column is called the **partition key**.
 
-## Bucketing
+Partitioning is commonly used to speed up slicing operations.
+
+Note that when a table is partitioned based on some column, that column is no longer stored with the rest of the table data, as its value is implicit in the partitions.
+
+Strict partitioning: If the `where` clause can only refer to the partition key, it is strict partitioning. We can turn it off by:
+
+```
+SET hive.exec.dynamic.partition.mode=nonstrict;
+```
+
+## Bucketing/Clustering
 
 This is similar to partitioning. Consider a case where there are a very high number of unique values in a column. If a table is partitioned on such a column, there will be a large number of partitions, leading to a high maintainence overhead.
 
