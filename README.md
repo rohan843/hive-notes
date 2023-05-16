@@ -12,7 +12,7 @@
     - [Other components](#other-components)
   - [Limitations](#limitations)
   - [Abilities](#abilities)
-  - [Differneces with traditional RDBMS](#differneces-with-traditional-rdbms)
+  - [Differences with traditional RDBMS](#differences-with-traditional-rdbms)
   - [Type system](#type-system)
   - [Hive Data Models](#hive-data-models)
   - [Partitioning](#partitioning)
@@ -66,7 +66,7 @@ Other components include hive compiler, execution engine, etc.
 4. Can store the results of a query in an HDFS directory.
 5. Can perform an equi-join between two tables.
 
-## Differneces with traditional RDBMS
+## Differences with traditional RDBMS
 
 1. **Schema-on-read**: This scheme means that the schema of data is validated not when the data is loaded, but when it is queried (i.e., read). This allows for a very fast initial load.
 2. No updates, transactions or indexes are supported.
